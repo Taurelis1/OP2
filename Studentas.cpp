@@ -3,29 +3,27 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
-//#include <vector>
+#include <vector>
 #include <chrono>
 #include <ctime>
 #include <sstream>
 #include <stdexcept>
 #include <limits>
 #include <algorithm>
-#include <deque>
 
 using namespace std;
 using namespace std::chrono;
 
 char rikiavimas; // Define the global variable
 
-double Mediana(const deque<int>& deq) {
-    if (deq.empty()) return 0.0;
-    vector<int> vec(deq.begin(), deq.end());
-    std::sort(vec.begin(), vec.end());
-    int n = vec.size();
+double Mediana(const vector<int>& vec) {
+    vector<int> sortedVec = vec;
+    std::sort(sortedVec.begin(), sortedVec.end());
+    int n = sortedVec.size();
     if (n % 2 == 0) {
-        return (vec[n / 2 - 1] + vec[n / 2]) / 2.0;
+        return (sortedVec[n / 2 - 1] + sortedVec[n / 2]) / 2.0;
     } else {
-        return vec[n / 2];
+        return sortedVec[n / 2];
     }
 }
 
@@ -45,7 +43,7 @@ string generuotiPavarde() {
 }
 
 // Funkcija, skirta skaityti studentu duomenis is failo
-bool skaitymas(deque<Studentas>& studentai, const string& failoPav) {
+bool skaitymas(vector<Studentas>& studentai, const string& failoPav) {
     ifstream inFile(failoPav);
     if (!inFile) {
         cerr << "Nepavyko atidaryti failo: " << failoPav << endl;
@@ -78,7 +76,7 @@ bool skaitymas(deque<Studentas>& studentai, const string& failoPav) {
 }
 
 // Funkcija, skirta spausdinti studentu duomenis
-void spausdinti(const deque<Studentas>& studentai, std::ostream& out) {
+void spausdinti(const vector<Studentas>& studentai, std::ostream& out) {
     out << left << setw(15) << "Vardas" << setw(20) << "Pavarde" << setw(20) << "Galutinis (Vid.)" << setw(20) << "Galutinis (Med.)" << endl;
     out << "---------------------------------------------------------------------" << endl;
 
@@ -98,11 +96,11 @@ void spausdinti(const deque<Studentas>& studentai, std::ostream& out) {
 }
 
 // Funkcija, skirta rusiavimui ir isvedimui
-void sortAndOutputStudents(deque<Studentas>& studentai) {
+void sortAndOutputStudents(vector<Studentas>& studentai) {
     // 1. Skirstymo į grupes laikas
     auto start_split = high_resolution_clock::now();
 
-    deque<Studentas> vargsai, kietakai;
+    vector<Studentas> vargsai, kietakai;
     for (const auto& student : studentai) {
         double vidurkis = 0.0;
         if (!student.nd.empty()) {
@@ -149,7 +147,7 @@ void sortAndOutputStudents(deque<Studentas>& studentai) {
     std::chrono::duration<double> duration_sort = end_sort - start_sort;
     cout << "Rusiavimo didejimo tvarka trukme: " << duration_sort.count() << " s\n";
 
-    // 3. Išvedimo laikas
+    // 3. Išvedimo laikas (jei norite matuoti)
     auto start_output = high_resolution_clock::now();
 
     ofstream outFileVargsai("vargsai.txt", ios::app);
@@ -172,7 +170,7 @@ void sortAndOutputStudents(deque<Studentas>& studentai) {
     cout << "Failai vargsai.txt ir kietakai.txt sekmingai atnaujinti.\n";
 }
 // Funkcija, skirta ivesti studentu duomenis
-void ivestiStudentus(deque<Studentas>& studentai) {
+void ivestiStudentus(vector<Studentas>& studentai) {
     char continueInput;
     do {
         Studentas student;
@@ -231,7 +229,7 @@ void ivestiStudentus(deque<Studentas>& studentai) {
 }
 
 // Funkcija, skirta failo ivedimui
-void handleFileInput(deque<Studentas>& studentai) {
+void handleFileInput(vector<Studentas>& studentai) {
     string failoPav;
     bool success = false;
     do {
@@ -243,23 +241,12 @@ void handleFileInput(deque<Studentas>& studentai) {
         std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
         cout << "Failo nuskaitymo trukme: " << duration.count() << " s" << endl;
     } while (!success);
-
- cout << "Pasirinkite strategija (1 - du konteineriai, 2 - vienas konteineris su trynimu, 3 - naudojant partition): ";
-int strat;
-cin >> strat;
-if (strat == 1) {
-    sortAndOutputStudents(studentai);
-} else if (strat == 2) {
-    skaidyti2_deque(studentai);
-} else if (strat == 3) {
-    skaidyti3_deque(studentai);
-} else {
-    cout << "Neteisingas pasirinkimas. Bandykite dar karta." << endl;
-}
+        skaidyti3_vector(studentai);      
+  
 }
 
 // Funkcija, skirta studentu rusiavimui
-void handleSorting(deque<Studentas>& studentai) {
+void handleSorting(vector<Studentas>& studentai) {
     cout << "Pasirinkite rusiavimo buda (v - vardas, p - pavarde, a - galutinis vidurkis, m - galutinis mediana): ";
     while (!(cin >> rikiavimas) || (rikiavimas != 'v' && rikiavimas != 'p' && rikiavimas != 'a' && rikiavimas != 'm')) {
         clearInput();
@@ -269,7 +256,7 @@ void handleSorting(deque<Studentas>& studentai) {
 }
 
 // Funkcija, skirta studentu duomenu isvedimui
-void handleOutput(const deque<Studentas>& studentai) {
+void handleOutput(const vector<Studentas>& studentai) {
     char outputChoice;
     cout << "Pasirinkite isvedimo buda (s - isvedimas i ekrana, f - isvedimas i faila): ";
     while (!(cin >> outputChoice) || (outputChoice != 's' && outputChoice != 'f')) {
@@ -331,7 +318,7 @@ void generateStudentFiles() {
 }
 
 // Define the missing function
-void rikiuotiStudentus(deque<Studentas>& studentai, char rikiavimas) {
+void rikiuotiStudentus(vector<Studentas>& studentai, char rikiavimas) {
     if (rikiavimas == 'v') {
         std::sort(studentai.begin(), studentai.end(), [](const Studentas& a, const Studentas& b) {
             return a.var < b.var;
@@ -358,78 +345,7 @@ void rikiuotiStudentus(deque<Studentas>& studentai, char rikiavimas) {
     }
 }
 
-void skaidyti2_deque(deque<Studentas>& studentai) {
-    auto start = high_resolution_clock::now();
-
-    deque<Studentas> vargsai;
-    auto it = studentai.begin();
-    while (it != studentai.end()) {
-        double vidurkis = 0.0;
-        for (int n : it->nd) vidurkis += n;
-        vidurkis /= it->nd.size();
-        double galutinis = 0.4 * vidurkis + 0.6 * it->egz;
-        if (galutinis < 5.0) {
-            vargsai.push_back(*it);
-            it = studentai.erase(it); // erase grąžina iteratorių į kitą elementą
-        } else {
-            ++it;
-        }
-    }
-
-    auto end = high_resolution_clock::now();
-    cout << "Skirstymo i dvi grupes trukme: " << duration_cast<duration<double>>(end - start).count() << " s\n";
-    cout << "Vargsai: " << vargsai.size() << ", Kietakai: " << studentai.size() << endl;
-
-    // Rūšiavimas
-    auto start_sort = high_resolution_clock::now();
-
-    auto sortFunction = [](const Studentas& a, const Studentas& b) {
-        if (rikiavimas == 'a') {
-            double avgA = 0.0, avgB = 0.0;
-            for (const auto& grade : a.nd) avgA += grade;
-            avgA = avgA / a.nd.size() * 0.4 + a.egz * 0.6;
-            for (const auto& grade : b.nd) avgB += grade;
-            avgB = avgB / b.nd.size() * 0.4 + b.egz * 0.6;
-            return avgA < avgB;
-        } else if (rikiavimas == 'm') {
-            double medA = Mediana(a.nd) * 0.4 + a.egz * 0.6;
-            double medB = Mediana(b.nd) * 0.4 + b.egz * 0.6;
-            return medA < medB;
-        }
-        return false;
-    };
-
-    std::sort(vargsai.begin(), vargsai.end(), sortFunction);
-    std::sort(studentai.begin(), studentai.end(), sortFunction);
-
-    auto end_sort = high_resolution_clock::now();
-    std::chrono::duration<double> duration_sort = end_sort - start_sort;
-    cout << "Rusiavimo didejimo tvarka trukme: " << duration_sort.count() << " s\n";
-
-    // Išvedimas
-    auto start_output = high_resolution_clock::now();
-
-    ofstream outFileVargsai("vargsai.txt", ios::app);
-    ofstream outFileKietakai("kietakai.txt", ios::app);
-
-    if (!outFileVargsai || !outFileKietakai) {
-        throw std::runtime_error("Nepavyko atidaryti failu isvedimui.");
-    }
-
-    spausdinti(vargsai, outFileVargsai);
-    spausdinti(studentai, outFileKietakai);
-
-    outFileVargsai.close();
-    outFileKietakai.close();
-
-    auto end_output = high_resolution_clock::now();
-    std::chrono::duration<double> duration_output = end_output - start_output;
-    cout << "Isvedimo i failus trukme: " << duration_output.count() << " s\n";
-
-    cout << "Failai vargsai.txt ir kietakai.txt sekmingai atnaujinti.\n";
-}
-
-void skaidyti3_deque(deque<Studentas>& studentai) {
+void skaidyti3_vector(vector<Studentas>& studentai) {
     auto start = high_resolution_clock::now();
 
     // Partition: vargsai priekyje, kietakai gale
@@ -443,8 +359,8 @@ void skaidyti3_deque(deque<Studentas>& studentai) {
 
     auto it = std::partition(studentai.begin(), studentai.end(), isVargsas);
 
-    deque<Studentas> vargsai(studentai.begin(), it);
-    deque<Studentas> kietakai(it, studentai.end());
+    vector<Studentas> vargsai(studentai.begin(), it);
+    vector<Studentas> kietakai(it, studentai.end());
 
     auto end = high_resolution_clock::now();
     cout << "Skirstymo i dvi grupes trukme (partition): " << duration_cast<duration<double>>(end - start).count() << " s\n";
