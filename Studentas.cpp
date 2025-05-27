@@ -211,6 +211,8 @@ void sortAndOutputStudents(vector<Studentas>& studentai) {
     // 2. Rūšiavimas
     auto start_sort = high_resolution_clock::now();
 
+    cout << "Rikiavimo budas: " << rikiavimas << endl; // Debug
+
     auto sortFunction = [](const Studentas& a, const Studentas& b) {
         if (rikiavimas == 'a') {
             return a.galutinisVidurkis() < b.galutinisVidurkis();
@@ -230,8 +232,8 @@ void sortAndOutputStudents(vector<Studentas>& studentai) {
     // 3. Išvedimas į failus
     auto start_output = high_resolution_clock::now();
 
-    ofstream outFileVargsai("vargsai.txt", ios::app);
-    ofstream outFileKietakai("kietakai.txt", ios::app);
+    ofstream outFileVargsai("vargsai.txt"); 
+    ofstream outFileKietakai("kietakai.txt"); 
 
     if (!outFileVargsai || !outFileKietakai) {
         throw runtime_error("Nepavyko atidaryti failu isvedimui.");
