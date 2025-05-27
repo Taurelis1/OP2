@@ -12,31 +12,49 @@
 #include <chrono>
 #include <limits>
 
-using namespace std;
-using namespace std::chrono;
+class Studentas {
+private:
+    std::string var_;
+    std::string pav_;
+    std::vector<int> nd_;
+    int egz_;
 
-struct Studentas {
-    string var;
-    string pav;
-    vector<int> nd;
-    int egz;
+public:
+    // Konstruktoriai
+    Studentas() : var_(""), pav_(""), egz_(0) {}
+    Studentas(const std::string& var, const std::string& pav, const std::vector<int>& nd, int egz)
+        : var_(var), pav_(pav), nd_(nd), egz_(egz) {}
+
+    // Get'eriai
+    std::string vardas() const { return var_; }
+    std::string pavarde() const { return pav_; }
+    std::vector<int> namuDarbai() const { return nd_; }
+    int egzaminas() const { return egz_; }
+
+    // Set'eriai 
+    void setEgzaminas(int egz) { egz_ = egz; }
+
+    // Galutinio balo skaičiavimas
+    double galutinisVidurkis() const;
+    double galutinisMediana() const;
+
+    // Draugiškos funkcijos
+    friend std::istream& operator>>(std::istream& in, Studentas& s);
+    friend std::ostream& operator<<(std::ostream& out, const Studentas& s);
 };
 
-extern char rikiavimas; // Declare as extern
-
-double Mediana(const vector<int>& vec);
+// Pagalbinės funkcijos
+double Mediana(const std::vector<int>& vec);
 void clearInput();
-string generuotiVarda();
-string generuotiPavarde();
-bool skaitymas(vector<Studentas>& studentai, const string& failoPav);
-void spausdinti(const vector<Studentas>& studentai, std::ostream& out);
-void rikiuotiStudentus(vector<Studentas>& studentai, char rikiavimas);
-void ivestiStudentus(vector<Studentas>& studentai);
-void handleFileInput(vector<Studentas>& studentai);
-void handleSorting(vector<Studentas>& studentai);
-void handleOutput(const vector<Studentas>& studentai);
+std::string generuotiVarda();
+std::string generuotiPavarde();
+bool skaitymas(std::vector<Studentas>& studentai, const std::string& failoPav);
+void spausdinti(const std::vector<Studentas>& studentai, std::ostream& out);
+void rikiuotiStudentus(std::vector<Studentas>& studentai, char rikiavimas);
+void ivestiStudentus(std::vector<Studentas>& studentai);
+void sortAndOutputStudents(std::vector<Studentas>& studentai);
+void handleFileInput(std::vector<Studentas>& studentai);
+void handleOutput(const std::vector<Studentas>& studentai);
 void generateStudentFiles();
-void sortAndOutputStudents(vector<Studentas>& studentai);
-void skaidyti3_vector(vector<Studentas>& studentai);
 
 #endif // STUDENTAS_H

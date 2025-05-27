@@ -5,8 +5,9 @@
 #include <chrono>
 #include <ctime>
 
-using namespace std;
 using namespace std::chrono;
+
+extern char rikiavimas;
 
 const int MAX_STUDENTU_SKAICIUS = 10000000; // Nustatome maksimalu studentu skaiciu
 
@@ -47,16 +48,15 @@ int main() {
             try {
                 studentai.reserve(studentuSkaicius); // Rezervuojame atminties vieta
                 for (int i = 0; i < studentuSkaicius; i++) {
-                    Studentas student;
-                    student.var = generuotiVarda();
-                    student.pav = generuotiPavarde();
-                    int ndSkaicius = 15; // Fixed number of marks
-                    student.nd.resize(ndSkaicius);
+                    string vardas = generuotiVarda() + to_string(i + 1);
+                    string pavarde = generuotiPavarde() + to_string(i + 1);
+                    int ndSkaicius = 15;
+                    vector<int> nd(ndSkaicius);
                     for (int j = 0; j < ndSkaicius; j++) {
-                        student.nd[j] = std::rand() % 10 + 1; // Generuojame balus nuo 1 iki 10
+                        nd[j] = std::rand() % 10 + 1;
                     }
-                    student.egz = std::rand() % 10 + 1; // Generuojame egzamino bala nuo 1 iki 10
-                    studentai.push_back(student);
+                    int egz = std::rand() % 10 + 1;
+                    studentai.emplace_back(vardas, pavarde, nd, egz);
                 }
                 sortAndOutputStudents(studentai);
             } catch (const std::bad_alloc& e) {
