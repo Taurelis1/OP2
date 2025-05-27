@@ -26,6 +26,7 @@ public:
     Studentas() : var_(""), pav_(""), egz_(0) {}
     Studentas(const std::string& var, const std::string& pav, const std::vector<int>& nd, int egz)
         : var_(var), pav_(pav), nd_(nd), egz_(egz) {}
+    ~Studentas();
 
     // Get'eriai
     std::string vardas() const { return var_; }
