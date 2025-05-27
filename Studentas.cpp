@@ -10,6 +10,7 @@
 #include <stdexcept>
 #include <limits>
 #include <algorithm>
+#include <direct.h>
 
 using namespace std;
 using namespace std::chrono;
@@ -31,17 +32,26 @@ double Mediana(const vector<int>& vec) {
 
 // Studentas metodai
 double Studentas::galutinisVidurkis() const {
+    if (cachedVidurkis >= 0) return cachedVidurkis;
     if (nd_.empty()) return 0.0;
     double suma = 0.0;
     for (int n : nd_) suma += n;
     double vid = suma / nd_.size();
-    return 0.4 * vid + 0.6 * egz_;
+    cachedVidurkis = 0.4 * vid + 0.6 * egz_;
+    return cachedVidurkis;
 }
 
 double Studentas::galutinisMediana() const {
+    if (cachedMediana >= 0) return cachedMediana;
     if (nd_.empty()) return 0.0;
     double med = Mediana(nd_);
-    return 0.4 * med + 0.6 * egz_;
+    cachedMediana = 0.4 * med + 0.6 * egz_;
+    return cachedMediana;
+}
+
+void Studentas::skaiciuotiCache() const {
+    galutinisVidurkis();
+    galutinisMediana();
 }
 
 // Pagalbinė funkcija įvesties laukui išvalyti
@@ -70,20 +80,22 @@ bool skaitymas(vector<Studentas>& studentai, const string& failoPav) {
 
     string line;
     getline(inFile, line); // Praleidžiam antraštę
-
+    studentai.clear();
     while (getline(inFile, line)) {
+        if (line.empty()) continue; // Praleidžiam tuščias eilutes
+
         istringstream iss(line);
         string vardas, pavarde;
-        vector<int> nd;
-        int value;
         if (!(iss >> vardas >> pavarde)) {
             cerr << "Klaida skaitant studento duomenis" << endl;
             continue;
         }
+        vector<int> nd;
+        int value;
         while (iss >> value) {
             nd.push_back(value);
         }
-        if (nd.empty()) continue;
+        if (nd.size() < 1) continue; // Turi būti bent 1 skaičius (egzaminas)
         int egz = nd.back();
         nd.pop_back();
         studentai.emplace_back(vardas, pavarde, nd, egz);
@@ -109,6 +121,7 @@ void spausdinti(const vector<Studentas>& studentai, ostream& out) {
 
 // Studentų rikiavimas pagal pasirinktą kriterijų
 void rikiuotiStudentus(vector<Studentas>& studentai, char rikiavimas) {
+    for (auto& s : studentai) s.skaiciuotiCache(); // Optimizacija!
     if (rikiavimas == 'v') {
         sort(studentai.begin(), studentai.end(), [](const Studentas& a, const Studentas& b) {
             return a.vardas() < b.vardas();
@@ -204,6 +217,9 @@ void sortAndOutputStudents(vector<Studentas>& studentai) {
         }
     }
 
+    cout << "Vargsai kiekis: " << vargsai.size() << endl;
+    cout << "Kietakai kiekis: " << kietakai.size() << endl;
+
     auto end_split = high_resolution_clock::now();
     chrono::duration<double> duration_split = end_split - start_split;
     cout << "Skirstymo i dvi grupes trukme: " << duration_split.count() << " s\n";
@@ -213,10 +229,16 @@ void sortAndOutputStudents(vector<Studentas>& studentai) {
 
     cout << "Rikiavimo budas: " << rikiavimas << endl; // Debug
 
-    auto sortFunction = [](const Studentas& a, const Studentas& b) {
-        if (rikiavimas == 'a') {
+    char rikiavimas_local = rikiavimas;
+
+    // Optimizacija: paskaičiuojam visiems galutinius balus prieš sort
+    for (auto& s : vargsai) s.skaiciuotiCache();
+    for (auto& s : kietakai) s.skaiciuotiCache();
+
+    auto sortFunction = [rikiavimas_local](const Studentas& a, const Studentas& b) {
+        if (rikiavimas_local == 'a') {
             return a.galutinisVidurkis() < b.galutinisVidurkis();
-        } else if (rikiavimas == 'm') {
+        } else if (rikiavimas_local == 'm') {
             return a.galutinisMediana() < b.galutinisMediana();
         }
         return false;
@@ -232,8 +254,12 @@ void sortAndOutputStudents(vector<Studentas>& studentai) {
     // 3. Išvedimas į failus
     auto start_output = high_resolution_clock::now();
 
-    ofstream outFileVargsai("vargsai.txt"); 
-    ofstream outFileKietakai("kietakai.txt"); 
+    char cwd[1024];
+    _getcwd(cwd, sizeof(cwd));
+    cout << "Failai bus kuriami kataloge: " << cwd << endl;
+
+    ofstream outFileVargsai("vargsai.txt");
+    ofstream outFileKietakai("kietakai.txt");
 
     if (!outFileVargsai || !outFileKietakai) {
         throw runtime_error("Nepavyko atidaryti failu isvedimui.");

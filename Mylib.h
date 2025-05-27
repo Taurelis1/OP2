@@ -32,5 +32,6 @@ using std::chrono::duration_cast;
 using std::chrono::duration;
 using std::chrono::seconds;
 using std::to_string;
+using std::exception;
 
 #endif // MYLIB_H

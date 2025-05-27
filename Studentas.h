@@ -18,6 +18,8 @@ private:
     std::string pav_;
     std::vector<int> nd_;
     int egz_;
+    mutable double cachedVidurkis = -1;
+    mutable double cachedMediana = -1;
 
 public:
     // Konstruktoriai
@@ -37,6 +39,7 @@ public:
     // Galutinio balo skaičiavimas
     double galutinisVidurkis() const;
     double galutinisMediana() const;
+    void skaiciuotiCache() const;
 
     // Draugiškos funkcijos
     friend std::istream& operator>>(std::istream& in, Studentas& s);
