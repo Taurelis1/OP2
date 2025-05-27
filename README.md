@@ -44,6 +44,3 @@ studentai1000000.txt
 | list  |  8.25015 s  |  0.178532 s |  6.76464 s  |
 | deque  |  6.24909 s  |  0.73808 s  |  7.58263 s  |
 
-Palyginus visas šias strategijas galima teigti, kad 3 strategija yra greičiausia, o antra strategija nors ir sutaupo atminties, bet didėjant studentų skaičiui programos veikimo laikas pradeda drastiškai ilgėti.
-
-![3 Strategija](nuotraukos/strategija.png)
