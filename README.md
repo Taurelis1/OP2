@@ -29,16 +29,28 @@ Eksperimentas atliktas su komanda:
 Testuota su failais: studentai100000.txt ir studentai1000000.txt  
 Sistema: Intel i9-14900HX, 32GB RAM, SSD 1000GB, Windows 11
 
-| Optimizavimo lygis | studentai100000.txt rūšiavimo trukmė | studentai1000000.txt rūšiavimo trukmė |
-|--------------------|--------------------------------------|---------------------------------------|
-| -O0 (be optimiz.)  | 0.276829 s                               | 3.32324 s                                |
-| -O1                | 0.102687 s                               | 1.25678 s                                |
-| -O2                | 0.09735 s                               | 1.22385 s                                |
-| -O3                | 0.104992 s                               | 1.23305 s                                |
+## Class:
+
+| Optimizavimo lygis | studentai100000.txt rūšiavimo trukmė | studentai1000000.txt rūšiavimo trukmė | exe failo dydis |
+|--------------------|--------------------------------------|---------------------------------------|-----------------|
+| -O0 (be optimiz.)  | 0.276829 s                               | 3.32324 s                                | 290 KB  |
+| -O1                | 0.102687 s                               | 1.25678 s                                | 178 KB   |
+| -O2                | 0.09735 s                               | 1.22385 s                                | 188 KB    |
+| -O3                | 0.104992 s                               | 1.23305 s                                | 189 KB   |
+
+## Struct:
+
+| Optimizavimo lygis | studentai100000.txt rūšiavimo trukmė | studentai1000000.txt rūšiavimo trukmė | exe failo dydis |
+|--------------------|--------------------------------------|---------------------------------------|-----------------|
+| -O0 (be optimiz.)  | 0.395714 s                               | 5.51937 s                                | 318 KB  |
+| -O1                | 0.08385 s                               | 1.12748 s                                | 186 KB   |
+| -O2                | 0.074694 s                              | 1.04977 s                                | 191 KB    |
+| -O3                | 0.076067 s                               | 1.08089 s                               | 192 KB   |
 
 **Išvada:**  
 Kompiliatoriaus optimizavimo flag'ai (-O1, -O2, -O3) žymiai pagreitina rūšiavimo vykdymą.  
 Didžiausias pagreitėjimas matomas prie -O2.  
+Optimizuotas struct yra šiektiek greitesnė rūšiuojant už class.
 Rekomenduojama naudoti bent -O2 galutiniam programos variantui.
 
 
