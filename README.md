@@ -35,6 +35,11 @@ Sistema: Intel i9-14900HX, 32GB RAM, SSD 1000GB, Windows 11
 | operator>>(istream&, Studentas&) | Duomenų įvedimas iš srauto (failo, ekrano, stringstream ir pan.)   |
 | operator<<(ostream&, const Studentas&) | Duomenų išvedimas į srautą (failą, ekraną, stringstream ir pan.) |
 
+## Klasės paveldėjimas
+
+- Sukurta abstrakti bazinė klasė `Zmogus`, iš kurios paveldima klasė `Studentas`.
+- Negalima sukurti `Zmogus` objekto – tik išvestinės klasės objektus (pvz., `Studentas`).
+
 ### Duomenų įvedimas
 
 - **Rankiniu būdu:** per programos meniu galima įvesti studentų duomenis klaviatūra.
