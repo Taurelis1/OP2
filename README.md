@@ -71,3 +71,7 @@ Visi Studentas Rule of Five ir IO operatoriai veikia teisingai!
 **Papildomai:** 
 
 ![Testo rezultatas](nuotraukos/testas.png)
+
+**Žmogaus klasės objektų kūrimas negalimas**
+
+![Testo rezultatas2](nuotraukos/testas2.png)
