@@ -11,11 +11,10 @@
 #include <stdexcept>
 #include <chrono>
 #include <limits>
+#include "Zmogus.h"
 
-class Studentas {
+class Studentas : public Zmogus {
 private:
-    std::string var_;
-    std::string pav_;
     std::vector<int> nd_;
     int egz_;
     mutable double cachedVidurkis = -1;
@@ -28,14 +27,14 @@ public:
     ~Studentas();
 
     // Rule of Five
-    Studentas(const Studentas& other); // Copy constructor
-    Studentas(Studentas&& other) noexcept; // Move constructor
-    Studentas& operator=(const Studentas& other); // Copy assignment
-    Studentas& operator=(Studentas&& other) noexcept; // Move assignment
+    Studentas(const Studentas& other);
+    Studentas(Studentas&& other) noexcept;
+    Studentas& operator=(const Studentas& other);
+    Studentas& operator=(Studentas&& other) noexcept;
 
-    // Get'eriai
-    std::string vardas() const { return var_; }
-    std::string pavarde() const { return pav_; }
+    // Get'eriai (override)
+    std::string vardas() const override { return var_; }
+    std::string pavarde() const override { return pav_; }
     std::vector<int> namuDarbai() const { return nd_; }
     int egzaminas() const { return egz_; }
 
@@ -50,6 +49,11 @@ public:
     // Įvesties/išvesties operatoriai
     friend std::istream& operator>>(std::istream& in, Studentas& s);
     friend std::ostream& operator<<(std::ostream& out, const Studentas& s);
+
+   
+    void info() const override {
+        std::cout << "Studentas: " << var_ << " " << pav_ << std::endl;
+    }
 };
 
 // Pagalbinės funkcijos
