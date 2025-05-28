@@ -3,4 +3,4 @@ project(OP)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(main main.cpp Studentas.cpp)
+add_executable(main Programa/main.cpp Programa/Studentas.cpp)
