@@ -17,6 +17,73 @@ using namespace std::chrono;
 
 char rikiavimas; // Globalus rikiavimo būdas
 
+// Konstruktoriai/destruktorius
+Studentas::Studentas() : var_(""), pav_(""), egz_(0) {}
+Studentas::Studentas(const std::string& var, const std::string& pav, const std::vector<int>& nd, int egz)
+    : var_(var), pav_(pav), nd_(nd), egz_(egz) {}
+Studentas::~Studentas() {}
+
+// Copy constructor
+Studentas::Studentas(const Studentas& other)
+    : var_(other.var_), pav_(other.pav_), nd_(other.nd_), egz_(other.egz_),
+      cachedVidurkis(other.cachedVidurkis), cachedMediana(other.cachedMediana) {}
+
+// Move constructor
+Studentas::Studentas(Studentas&& other) noexcept
+    : var_(std::move(other.var_)), pav_(std::move(other.pav_)), nd_(std::move(other.nd_)), egz_(other.egz_),
+      cachedVidurkis(other.cachedVidurkis), cachedMediana(other.cachedMediana) {}
+
+// Copy assignment
+Studentas& Studentas::operator=(const Studentas& other) {
+    if (this != &other) {
+        var_ = other.var_;
+        pav_ = other.pav_;
+        nd_ = other.nd_;
+        egz_ = other.egz_;
+        cachedVidurkis = other.cachedVidurkis;
+        cachedMediana = other.cachedMediana;
+    }
+    return *this;
+}
+
+// Move assignment
+Studentas& Studentas::operator=(Studentas&& other) noexcept {
+    if (this != &other) {
+        var_ = std::move(other.var_);
+        pav_ = std::move(other.pav_);
+        nd_ = std::move(other.nd_);
+        egz_ = other.egz_;
+        cachedVidurkis = other.cachedVidurkis;
+        cachedMediana = other.cachedMediana;
+    }
+    return *this;
+}
+
+// Įvesties operatorius
+std::istream& operator>>(std::istream& in, Studentas& s) {
+    s.nd_.clear();
+    in >> s.var_ >> s.pav_;
+    int n, egz;
+    for (int i = 0; i < 15; ++i) {
+        if (!(in >> n)) break;
+        s.nd_.push_back(n);
+    }
+    in >> egz;
+    s.egz_ = egz;
+    s.cachedVidurkis = -1;
+    s.cachedMediana = -1;
+    return in;
+}
+
+// Išvesties operatorius
+std::ostream& operator<<(std::ostream& out, const Studentas& s) {
+    out << std::left << std::setw(15) << s.var_
+        << std::setw(20) << s.pav_
+        << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVidurkis()
+        << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMediana();
+    return out;
+}
+
 // Medianos funkcija
 double Mediana(const vector<int>& vec) {
     if (vec.empty()) return 0.0;
