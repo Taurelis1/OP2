@@ -58,7 +58,7 @@ s2 (copy): Jonas Jonaitis egz: 9
 s3 (move): Jonas Jonaitis egz: 9
 s4 (copy assign): Jonas Jonaitis egz: 9
 s5 (move assign): Jonas Jonaitis egz: 9
-Išvestis į stringstream: Jonas          Jonaitis            8.00                8.00                
+Išvestis į stringstream: Jonas Jonaitis 10 9 8 7 6 5 4 3 2 1 10 9 8 7 6 9                
 s6 (istream): Jonas Jonaitis egz: 9
 Visi Studentas Rule of Five ir IO operatoriai veikia teisingai!
 ```
