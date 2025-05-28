@@ -137,8 +137,6 @@ string generuotiPavarde() {
     return "Pavarde";
 }
 
-Studentas::~Studentas() {
-}
 
 // Studentų nuskaitymas iš failo
 bool skaitymas(vector<Studentas>& studentai, const string& failoPav) {
