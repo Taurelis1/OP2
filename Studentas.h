@@ -22,11 +22,16 @@ private:
     mutable double cachedMediana = -1;
 
 public:
-    // Konstruktoriai
-    Studentas() : var_(""), pav_(""), egz_(0) {}
-    Studentas(const std::string& var, const std::string& pav, const std::vector<int>& nd, int egz)
-        : var_(var), pav_(pav), nd_(nd), egz_(egz) {}
+    // Konstruktoriai ir destruktorius
+    Studentas();
+    Studentas(const std::string& var, const std::string& pav, const std::vector<int>& nd, int egz);
     ~Studentas();
+
+    // Rule of Five
+    Studentas(const Studentas& other); // Copy constructor
+    Studentas(Studentas&& other) noexcept; // Move constructor
+    Studentas& operator=(const Studentas& other); // Copy assignment
+    Studentas& operator=(Studentas&& other) noexcept; // Move assignment
 
     // Get'eriai
     std::string vardas() const { return var_; }
@@ -42,7 +47,7 @@ public:
     double galutinisMediana() const;
     void skaiciuotiCache() const;
 
-    // Draugiškos funkcijos
+    // Įvesties/išvesties operatoriai
     friend std::istream& operator>>(std::istream& in, Studentas& s);
     friend std::ostream& operator<<(std::ostream& out, const Studentas& s);
 };
