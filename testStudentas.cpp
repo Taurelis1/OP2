@@ -9,7 +9,7 @@ void spausdintiStudenta(const Studentas& s, const string& prefix) {
 }
 
 int main() {
-    vector<int> nd = {10, 9, 8, 7, 6};
+    vector<int> nd = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 10, 9, 8, 7, 6}; // Namu darbu ivertinimai
     Studentas s1("Jonas", "Jonaitis", nd, 9);
     spausdintiStudenta(s1, "s1");
 

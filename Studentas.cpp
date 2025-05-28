@@ -63,13 +63,13 @@ Studentas& Studentas::operator=(Studentas&& other) noexcept {
 std::istream& operator>>(std::istream& in, Studentas& s) {
     s.nd_.clear();
     in >> s.var_ >> s.pav_;
-    int n, egz;
-    for (int i = 0; i < 15; ++i) {
+    int n;
+   
+    for (int i = 0; i < 15; ++i) { 
         if (!(in >> n)) break;
         s.nd_.push_back(n);
     }
-    in >> egz;
-    s.egz_ = egz;
+    in >> s.egz_;
     s.cachedVidurkis = -1;
     s.cachedMediana = -1;
     return in;
@@ -77,10 +77,9 @@ std::istream& operator>>(std::istream& in, Studentas& s) {
 
 // Išvesties operatorius
 std::ostream& operator<<(std::ostream& out, const Studentas& s) {
-    out << std::left << std::setw(15) << s.var_
-        << std::setw(20) << s.pav_
-        << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisVidurkis()
-        << std::setw(20) << std::fixed << std::setprecision(2) << s.galutinisMediana();
+    out << s.var_ << " " << s.pav_ << " ";
+    for (int n : s.nd_) out << n << " ";
+    out << s.egz_;
     return out;
 }
 
