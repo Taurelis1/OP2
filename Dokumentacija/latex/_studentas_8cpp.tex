@@ -1,0 +1,151 @@
+\doxysection{Studentas.\+cpp File Reference}
+\hypertarget{_studentas_8cpp}{}\label{_studentas_8cpp}\index{Studentas.cpp@{Studentas.cpp}}
+{\ttfamily \#include "{}Studentas.\+h"{}}\newline
+{\ttfamily \#include "{}Mylib.\+h"{}}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$direct.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::istream \& \mbox{\hyperlink{_studentas_8cpp_af8f35a3ee68335b1adb35ac85edf1c03}{operator$>$$>$}} (std\+::istream \&in, \mbox{\hyperlink{class_studentas}{Studentas}} \&s)
+\item 
+std\+::ostream \& \mbox{\hyperlink{_studentas_8cpp_a8ef0139ac1bd9eb75f994ab35393cdad}{operator$<$$<$}} (std\+::ostream \&out, const \mbox{\hyperlink{class_studentas}{Studentas}} \&s)
+\item 
+double \mbox{\hyperlink{_studentas_8cpp_a5a2988215b8f075ecfa080ce741ff3be}{Mediana}} (const vector$<$ int $>$ \&vec)
+\item 
+void \mbox{\hyperlink{_studentas_8cpp_a5d555657ce648c1a47abb70f1029589d}{clear\+Input}} ()
+\item 
+string \mbox{\hyperlink{_studentas_8cpp_a4ff37576ef36689ad650d69e68cb1b5a}{generuoti\+Varda}} ()
+\item 
+string \mbox{\hyperlink{_studentas_8cpp_add5cc10de43dbe1b521c39803bf666fa}{generuoti\+Pavarde}} ()
+\item 
+bool \mbox{\hyperlink{_studentas_8cpp_a5597522577de96244c0a0915bf63c701}{skaitymas}} (vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&studentai, const string \&failo\+Pav)
+\item 
+void \mbox{\hyperlink{_studentas_8cpp_acbfdde9ca85329043ded974ada59d4ef}{spausdinti}} (const vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&studentai, ostream \&out)
+\item 
+void \mbox{\hyperlink{_studentas_8cpp_aa9456d4ee6c35e2a7b566f5c8b6c55e7}{rikiuoti\+Studentus}} (vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&studentai, char \mbox{\hyperlink{main_8cpp_a35e1d90a5f2c09deb1610d128c1a7d7c}{rikiavimas}})
+\item 
+void \mbox{\hyperlink{_studentas_8cpp_a34c8626269c81f6b2e41c97e5f96e700}{ivesti\+Studentus}} (vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&studentai)
+\item 
+void \mbox{\hyperlink{_studentas_8cpp_aa7fc8362f61184a94a565a53d81bd9bc}{sort\+And\+Output\+Students}} (vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&studentai)
+\item 
+void \mbox{\hyperlink{_studentas_8cpp_a4ecfab77bdf0ef69410635d3394fc2a6}{handle\+File\+Input}} (vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&studentai)
+\item 
+void \mbox{\hyperlink{_studentas_8cpp_a5e49666e93427b7ccc0764d96fb8ace2}{handle\+Output}} (const vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&studentai)
+\item 
+void \mbox{\hyperlink{_studentas_8cpp_afd36fa3e20871cda093506cd868c36c8}{generate\+Student\+Files}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{_studentas_8cpp_a35e1d90a5f2c09deb1610d128c1a7d7c}{rikiavimas}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{_studentas_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_studentas_8cpp_a5d555657ce648c1a47abb70f1029589d}\index{Studentas.cpp@{Studentas.cpp}!clearInput@{clearInput}}
+\index{clearInput@{clearInput}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{clearInput()}{clearInput()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_a5d555657ce648c1a47abb70f1029589d} 
+void clear\+Input (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_studentas_8cpp_afd36fa3e20871cda093506cd868c36c8}\index{Studentas.cpp@{Studentas.cpp}!generateStudentFiles@{generateStudentFiles}}
+\index{generateStudentFiles@{generateStudentFiles}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{generateStudentFiles()}{generateStudentFiles()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_afd36fa3e20871cda093506cd868c36c8} 
+void generate\+Student\+Files (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_studentas_8cpp_add5cc10de43dbe1b521c39803bf666fa}\index{Studentas.cpp@{Studentas.cpp}!generuotiPavarde@{generuotiPavarde}}
+\index{generuotiPavarde@{generuotiPavarde}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{generuotiPavarde()}{generuotiPavarde()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_add5cc10de43dbe1b521c39803bf666fa} 
+string generuoti\+Pavarde (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_studentas_8cpp_a4ff37576ef36689ad650d69e68cb1b5a}\index{Studentas.cpp@{Studentas.cpp}!generuotiVarda@{generuotiVarda}}
+\index{generuotiVarda@{generuotiVarda}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{generuotiVarda()}{generuotiVarda()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_a4ff37576ef36689ad650d69e68cb1b5a} 
+string generuoti\+Varda (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_studentas_8cpp_a4ecfab77bdf0ef69410635d3394fc2a6}\index{Studentas.cpp@{Studentas.cpp}!handleFileInput@{handleFileInput}}
+\index{handleFileInput@{handleFileInput}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{handleFileInput()}{handleFileInput()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_a4ecfab77bdf0ef69410635d3394fc2a6} 
+void handle\+File\+Input (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{studentai}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_studentas_8cpp_a5e49666e93427b7ccc0764d96fb8ace2}\index{Studentas.cpp@{Studentas.cpp}!handleOutput@{handleOutput}}
+\index{handleOutput@{handleOutput}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{handleOutput()}{handleOutput()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_a5e49666e93427b7ccc0764d96fb8ace2} 
+void handle\+Output (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{studentai}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_studentas_8cpp_a34c8626269c81f6b2e41c97e5f96e700}\index{Studentas.cpp@{Studentas.cpp}!ivestiStudentus@{ivestiStudentus}}
+\index{ivestiStudentus@{ivestiStudentus}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{ivestiStudentus()}{ivestiStudentus()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_a34c8626269c81f6b2e41c97e5f96e700} 
+void ivesti\+Studentus (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{studentai}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_studentas_8cpp_a5a2988215b8f075ecfa080ce741ff3be}\index{Studentas.cpp@{Studentas.cpp}!Mediana@{Mediana}}
+\index{Mediana@{Mediana}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{Mediana()}{Mediana()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_a5a2988215b8f075ecfa080ce741ff3be} 
+double Mediana (\begin{DoxyParamCaption}\item[{const vector$<$ int $>$ \&}]{vec}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_studentas_8cpp_a8ef0139ac1bd9eb75f994ab35393cdad}\index{Studentas.cpp@{Studentas.cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_a8ef0139ac1bd9eb75f994ab35393cdad} 
+std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out}{, }\item[{const \mbox{\hyperlink{class_studentas}{Studentas}} \&}]{s}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_studentas_8cpp_af8f35a3ee68335b1adb35ac85edf1c03}\index{Studentas.cpp@{Studentas.cpp}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$>$$>$()}{operator>>()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_af8f35a3ee68335b1adb35ac85edf1c03} 
+std\+::istream \& operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{in}{, }\item[{\mbox{\hyperlink{class_studentas}{Studentas}} \&}]{s}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_studentas_8cpp_aa9456d4ee6c35e2a7b566f5c8b6c55e7}\index{Studentas.cpp@{Studentas.cpp}!rikiuotiStudentus@{rikiuotiStudentus}}
+\index{rikiuotiStudentus@{rikiuotiStudentus}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{rikiuotiStudentus()}{rikiuotiStudentus()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_aa9456d4ee6c35e2a7b566f5c8b6c55e7} 
+void rikiuoti\+Studentus (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{studentai}{, }\item[{char}]{rikiavimas}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_studentas_8cpp_a5597522577de96244c0a0915bf63c701}\index{Studentas.cpp@{Studentas.cpp}!skaitymas@{skaitymas}}
+\index{skaitymas@{skaitymas}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{skaitymas()}{skaitymas()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_a5597522577de96244c0a0915bf63c701} 
+bool skaitymas (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{studentai}{, }\item[{const string \&}]{failo\+Pav}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_studentas_8cpp_aa7fc8362f61184a94a565a53d81bd9bc}\index{Studentas.cpp@{Studentas.cpp}!sortAndOutputStudents@{sortAndOutputStudents}}
+\index{sortAndOutputStudents@{sortAndOutputStudents}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{sortAndOutputStudents()}{sortAndOutputStudents()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_aa7fc8362f61184a94a565a53d81bd9bc} 
+void sort\+And\+Output\+Students (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{studentai}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_studentas_8cpp_acbfdde9ca85329043ded974ada59d4ef}\index{Studentas.cpp@{Studentas.cpp}!spausdinti@{spausdinti}}
+\index{spausdinti@{spausdinti}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{spausdinti()}{spausdinti()}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_acbfdde9ca85329043ded974ada59d4ef} 
+void spausdinti (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{class_studentas}{Studentas}} $>$ \&}]{studentai}{, }\item[{ostream \&}]{out}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{_studentas_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_studentas_8cpp_a35e1d90a5f2c09deb1610d128c1a7d7c}\index{Studentas.cpp@{Studentas.cpp}!rikiavimas@{rikiavimas}}
+\index{rikiavimas@{rikiavimas}!Studentas.cpp@{Studentas.cpp}}
+\doxysubsubsection{\texorpdfstring{rikiavimas}{rikiavimas}}
+{\footnotesize\ttfamily \label{_studentas_8cpp_a35e1d90a5f2c09deb1610d128c1a7d7c} 
+char rikiavimas}
+
