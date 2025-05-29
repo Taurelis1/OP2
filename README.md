@@ -34,7 +34,6 @@ Talpa: size, capacity, empty, reserve, shrink_to_fit
 Modifikatoriai: clear, push_back, pop_back, resize, swap, insert, erase, assign, emplace_back, emplace
 Operatoriai: ==, !=, <, >, <=, >=
 Non-member swap, get_allocator
-Testavimo pavyzdžiai
 Toliau pateikiami kelių funkcijų palyginimo pavyzdžiai – rezultatai identiški kaip ir su std::vector:
 
 // push_back ir operator[]
@@ -60,9 +59,21 @@ Vector<int> v5 = {1, 2, 3};
 Vector<int> v6 = {1, 2, 3};
 bool eq = (v5 == v6); // true
 
+# Spartos analizė
 
+naudojamas bench.cpp failas su tam tikru skaičiumi elementų.
 
+|Elementu skaicius | std::vector (s) | Vector (s)|
+-----------------|-----------------|------------
+|10000           | 0.000000      | 0.000000|
+|100000           | 0.000997      | 0.001019|
+|1000000           | 0.010447      | 0.006265|
+|10000000           | 0.085722      | 0.045869|
+|100000000           | 0.791758      | 0.431477|
 
+![Testo rezultatas4](nuotraukos/testas4.png)
+
+Abu konteineriai veikia labai greitai, tačiau mano Vector kai kuriais atvejais veikia net greičiau dėl paprastesnės realizacijos. std::vector turi daugiau saugumo ir papildomų galimybių, todėl realiose situacijose skirtumas gali būti mažesnis arba std::vector gali būti greitesnis su optimizacijomis.
 
 
 
