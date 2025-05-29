@@ -1,7 +1,7 @@
 #include "Studentas.h"
 #include "Mylib.h"
 #include <iostream>
-#include <vector>
+#include "Vector.h"
 #include <chrono>
 #include <ctime>
 
@@ -25,7 +25,7 @@ int main() {
 
         std::srand(std::time(0)); 
 
-        vector<Studentas> studentai;
+        Vector<Studentas> studentai;
         char pasirinkimas;
 
         cout << "Pasirinkite veiksma (s - generuoti studentu failus, g - generuoti viska, i - ivesti duomenis, f - skaityti is failo, q - uzdaryti programa): ";
@@ -51,7 +51,7 @@ int main() {
                     string vardas = generuotiVarda() + to_string(i + 1);
                     string pavarde = generuotiPavarde() + to_string(i + 1);
                     int ndSkaicius = 15;
-                    vector<int> nd(ndSkaicius);
+                    Vector<int> nd(ndSkaicius);
                     for (int j = 0; j < ndSkaicius; j++) {
                         nd[j] = std::rand() % 10 + 1;
                     }

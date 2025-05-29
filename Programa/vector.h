@@ -9,7 +9,7 @@
 #include <memory>
 #include <utility>
 #include <type_traits>
-#include <vector> // tik jei norėsi palyginimui
+#include <vector> // tik palyginimui
 
 template <typename T>
 class Vector {

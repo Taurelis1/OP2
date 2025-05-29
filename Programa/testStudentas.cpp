@@ -1,3 +1,4 @@
+#include "Vector.h"
 #include "Studentas.h"
 #include "Zmogus.h"
 #include <iostream>
@@ -13,7 +14,7 @@ int main() {
     // Negalima sukurti Zmogus objekto, nes tai abstrakti klasė (kompiliatorius išmes klaidą):
 // Zmogus z("Vardenis", "Pavardenis"); // <-- Ši eilutė nesikompiliuos!
 
-    vector<int> nd = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 10, 9, 8, 7, 6}; // Namu darbu ivertinimai
+    Vector<int> nd = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 10, 9, 8, 7, 6}; // Namu darbu ivertinimai
     Studentas s1("Jonas", "Jonaitis", nd, 9);
     spausdintiStudenta(s1, "s1");
 

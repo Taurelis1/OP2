@@ -2,7 +2,7 @@
 #define STUDENTAS_H
 
 #include <iostream>
-#include <vector>
+#include "Vector.h"
 #include <string>
 #include <algorithm>
 #include <iomanip>
@@ -15,7 +15,7 @@
 
 class Studentas : public Zmogus {
 private:
-    std::vector<int> nd_;
+    Vector<int> nd_;
     int egz_;
     mutable double cachedVidurkis = -1;
     mutable double cachedMediana = -1;
@@ -23,7 +23,7 @@ private:
 public:
     // Konstruktoriai ir destruktorius
     Studentas();
-    Studentas(const std::string& var, const std::string& pav, const std::vector<int>& nd, int egz);
+    Studentas(const std::string& var, const std::string& pav, const Vector<int>& nd, int egz);
     ~Studentas();
 
     // Rule of Five
@@ -35,7 +35,7 @@ public:
     // Get'eriai (override)
     std::string vardas() const override { return var_; }
     std::string pavarde() const override { return pav_; }
-    std::vector<int> namuDarbai() const { return nd_; }
+    Vector<int> namuDarbai() const { return nd_; }
     int egzaminas() const { return egz_; }
 
     // Set'eriai 
@@ -57,17 +57,17 @@ public:
 };
 
 // Pagalbinės funkcijos
-double Mediana(const std::vector<int>& vec);
+double Mediana(const Vector<int>& vec);
 void clearInput();
 std::string generuotiVarda();
 std::string generuotiPavarde();
-bool skaitymas(std::vector<Studentas>& studentai, const std::string& failoPav);
-void spausdinti(const std::vector<Studentas>& studentai, std::ostream& out);
-void rikiuotiStudentus(std::vector<Studentas>& studentai, char rikiavimas);
-void ivestiStudentus(std::vector<Studentas>& studentai);
-void sortAndOutputStudents(std::vector<Studentas>& studentai);
-void handleFileInput(std::vector<Studentas>& studentai);
-void handleOutput(const std::vector<Studentas>& studentai);
+bool skaitymas(Vector<Studentas>& studentai, const std::string& failoPav);
+void spausdinti(const Vector<Studentas>& studentai, std::ostream& out);
+void rikiuotiStudentus(Vector<Studentas>& studentai, char rikiavimas);
+void ivestiStudentus(Vector<Studentas>& studentai);
+void sortAndOutputStudents(Vector<Studentas>& studentai);
+void handleFileInput(Vector<Studentas>& studentai);
+void handleOutput(const Vector<Studentas>& studentai);
 void generateStudentFiles();
 
 #endif // STUDENTAS_H
