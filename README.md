@@ -85,7 +85,25 @@ Abu konteineriai veikia labai greitai, tačiau mano Vector kai kuriais atvejais 
 
 Užpildant 100 000 000 elementų, tiek std::vector, tiek mano Vector klasė atmintį perskirstė 28 kartus, todėl jų efektyvumas atminties valdymo prasme yra praktiškai identiškas.
 
+# Spartos analizė 2
 
+studentai100000.txt
+| Konteineris | nuskaitymo trukmė  | skirstymo į dvi grupes trukmė | rūšiavimo didėjimo tvarka trukmė |
+|----|--------------------|-------------------------|--------------------------------|
+| std::vector  |  0.625739 s  |  0.032274 s  |  0.422755 s  |  
+| Vector       |  0.605669 s  |  0.069709 s  |  0.196052 s | 
+
+studentai1000000.txt
+| Konteineris | nuskaitymo trukmė  | skirstymo į dvi grupes trukmė | rūšiavimo didėjimo tvarka trukmė | 
+|----|--------------------|-------------------------|--------------------------------|
+| std::vector  |  6.51211 s  |  0.389969 s  |  5.55069 s  | 
+| Vector       |  5.939 s  |  0.755909 s  |  2.46786 s | 
+
+studentai10000000.txt
+| Konteineris | nuskaitymo trukmė  | skirstymo į dvi grupes trukmė | rūšiavimo didėjimo tvarka trukmė |
+|----|--------------------|-------------------------|--------------------------------|
+| std::vector  |  59.81252 s   |  3.89258 s  |  54.50758 s  |  
+| Vector       |  54.32189 s  |  7.15958 s  |  23.67893 s  |  
 
 
 

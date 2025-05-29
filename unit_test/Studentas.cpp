@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
-#include <vector>
+#include "Vector.h"
 #include <chrono>
 #include <ctime>
 #include <sstream>
@@ -19,7 +19,7 @@ char rikiavimas; // Globalus rikiavimo būdas
 
 // Konstruktoriai/destruktorius
 Studentas::Studentas() : Zmogus(), nd_(), egz_(0) {}
-Studentas::Studentas(const std::string& var, const std::string& pav, const std::vector<int>& nd, int egz)
+Studentas::Studentas(const std::string& var, const std::string& pav, const Vector<int>& nd, int egz)
     : Zmogus(var, pav), nd_(nd), egz_(egz) {}
 Studentas::~Studentas() {}
 
@@ -84,9 +84,9 @@ std::ostream& operator<<(std::ostream& out, const Studentas& s) {
 }
 
 // Medianos funkcija
-double Mediana(const vector<int>& vec) {
+double Mediana(const Vector<int>& vec) {
     if (vec.empty()) return 0.0;
-    vector<int> sortedVec = vec;
+    Vector<int> sortedVec = vec;
     sort(sortedVec.begin(), sortedVec.end());
     int n = sortedVec.size();
     if (n % 2 == 0) {
@@ -138,7 +138,7 @@ string generuotiPavarde() {
 
 
 // Studentų nuskaitymas iš failo
-bool skaitymas(vector<Studentas>& studentai, const string& failoPav) {
+bool skaitymas(Vector<Studentas>& studentai, const string& failoPav) {
     ifstream inFile(failoPav);
     if (!inFile) {
         cerr << "Nepavyko atidaryti failo: " << failoPav << endl;
@@ -157,7 +157,7 @@ bool skaitymas(vector<Studentas>& studentai, const string& failoPav) {
             cerr << "Klaida skaitant studento duomenis" << endl;
             continue;
         }
-        vector<int> nd;
+        Vector<int> nd;
         int value;
         while (iss >> value) {
             nd.push_back(value);
@@ -172,7 +172,7 @@ bool skaitymas(vector<Studentas>& studentai, const string& failoPav) {
 }
 
 // Studentų spausdinimas
-void spausdinti(const vector<Studentas>& studentai, ostream& out) {
+void spausdinti(const Vector<Studentas>& studentai, ostream& out) {
     out << left << setw(15) << "Vardas" << setw(20) << "Pavarde"
         << setw(20) << "Galutinis (Vid.)" << setw(20) << "Galutinis (Med.)" << endl;
     out << "---------------------------------------------------------------------" << endl;
@@ -187,7 +187,7 @@ void spausdinti(const vector<Studentas>& studentai, ostream& out) {
 }
 
 // Studentų rikiavimas pagal pasirinktą kriterijų
-void rikiuotiStudentus(vector<Studentas>& studentai, char rikiavimas) {
+void rikiuotiStudentus(Vector<Studentas>& studentai, char rikiavimas) {
     for (auto& s : studentai) s.skaiciuotiCache(); // Optimizacija!
     if (rikiavimas == 'v') {
         sort(studentai.begin(), studentai.end(), [](const Studentas& a, const Studentas& b) {
@@ -209,11 +209,11 @@ void rikiuotiStudentus(vector<Studentas>& studentai, char rikiavimas) {
 }
 
 // Studentų įvedimas ranka
-void ivestiStudentus(vector<Studentas>& studentai) {
+void ivestiStudentus(Vector<Studentas>& studentai) {
     char continueInput;
     do {
         string vardas, pavarde;
-        vector<int> nd;
+        Vector<int> nd;
         int egz;
 
         cout << "Iveskite studento varda: ";
@@ -271,11 +271,11 @@ void ivestiStudentus(vector<Studentas>& studentai) {
 }
 
 // Studentų rikiavimas ir išvedimas į failus
-void sortAndOutputStudents(vector<Studentas>& studentai) {
+void sortAndOutputStudents(Vector<Studentas>& studentai) {
     // 1. Skirstymas į grupes
     auto start_split = high_resolution_clock::now();
 
-    vector<Studentas> vargsai, kietakai;
+    Vector<Studentas> vargsai, kietakai;
     for (const auto& student : studentai) {
         if (student.galutinisVidurkis() < 5.0) {
             vargsai.push_back(student);
@@ -346,7 +346,7 @@ void sortAndOutputStudents(vector<Studentas>& studentai) {
 }
 
 // Failo įvedimo apdorojimas
-void handleFileInput(vector<Studentas>& studentai) {
+void handleFileInput(Vector<Studentas>& studentai) {
     string failoPav;
     bool success = false;
     do {
@@ -362,7 +362,7 @@ void handleFileInput(vector<Studentas>& studentai) {
 }
 
 // Studentų duomenų išvedimas į ekraną arba failą
-void handleOutput(const vector<Studentas>& studentai) {
+void handleOutput(const Vector<Studentas>& studentai) {
     char outputChoice;
     cout << "Pasirinkite isvedimo buda (s - isvedimas i ekrana, f - isvedimas i faila): ";
     while (!(cin >> outputChoice) || (outputChoice != 's' && outputChoice != 'f')) {
@@ -389,7 +389,7 @@ void handleOutput(const vector<Studentas>& studentai) {
 
 // Studentų failų generavimas
 void generateStudentFiles() {
-    const vector<int> studentCounts = {1000, 10000, 100000, 1000000, 10000000};
+    const Vector<int> studentCounts = {1000, 10000, 100000, 1000000, 10000000};
     for (int count : studentCounts) {
         auto start = high_resolution_clock::now();
 
