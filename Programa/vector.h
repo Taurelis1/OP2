@@ -188,8 +188,42 @@ public:
     bool operator<=(const Vector& other) const { return !(other < *this); }
     bool operator>=(const Vector& other) const { return !(*this < other); }
 
-    // More methods (emplace, insert range, erase range, etc.) can be added as needed
+     // Insert range [first, last) at position
+    template <typename InputIt>
+    iterator insert(const_iterator pos, InputIt first, InputIt last) {
+        size_type idx = pos - data_;
+        size_type count = std::distance(first, last);
+        if (sz_ + count > cap_) reserve(std::max(cap_ * 2, sz_ + count));
+        for (size_type i = sz_ + count - 1; i >= idx + count; --i)
+            data_[i] = std::move(data_[i - count]);
+        for (size_type i = 0; i < count; ++i)
+            data_[idx + i] = *(first++);
+        sz_ += count;
+        return data_ + idx;
+    }
 
+    // Erase range [first, last)
+    iterator erase(const_iterator first, const_iterator last) {
+        size_type idx_first = first - data_;
+        size_type idx_last = last - data_;
+        size_type count = idx_last - idx_first;
+        for (size_type i = idx_first; i + count < sz_; ++i)
+            data_[i] = std::move(data_[i + count]);
+        sz_ -= count;
+        return data_ + idx_first;
+    }
+
+    // Emplace element at position
+    template <typename... Args>
+    iterator emplace(const_iterator pos, Args&&... args) {
+        size_type idx = pos - data_;
+        if (sz_ == cap_) reserve(cap_ == 0 ? 1 : cap_ * 2);
+        for (size_type i = sz_; i > idx; --i)
+            data_[i] = std::move(data_[i - 1]);
+        new (data_ + idx) T(std::forward<Args>(args)...);
+        ++sz_;
+        return data_ + idx;
+    }
 };
 
 #endif // VECTOR_H
