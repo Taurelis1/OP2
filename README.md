@@ -64,7 +64,7 @@ bool eq = (v5 == v6); // true
 naudojamas bench.cpp failas su tam tikru skaičiumi elementų.
 
 |Elementu skaicius | std::vector (s) | Vector (s)|
------------------|-----------------|------------
+-----------------|-----------------|------------|
 |10000           | 0.000000      | 0.000000|
 |100000           | 0.000997      | 0.001019|
 |1000000           | 0.010447      | 0.006265|
@@ -75,11 +75,15 @@ naudojamas bench.cpp failas su tam tikru skaičiumi elementų.
 
 Abu konteineriai veikia labai greitai, tačiau mano Vector kai kuriais atvejais veikia net greičiau dėl paprastesnės realizacijos. std::vector turi daugiau saugumo ir papildomų galimybių, todėl realiose situacijose skirtumas gali būti mažesnis arba std::vector gali būti greitesnis su optimizacijomis.
 
+# Atminties perskirstymai
 
+|Elementu skaicius | std::vector perskirstymų | Vector perskirstymų|
+-----------------|-----------------|------------|
+|100000000           | 28      | 28       |
 
+![Testo rezultatas5](nuotraukos/testas5.png)
 
-
-
+Užpildant 100 000 000 elementų, tiek std::vector, tiek mano Vector klasė atmintį perskirstė 28 kartus, todėl jų efektyvumas atminties valdymo prasme yra praktiškai identiškas.
 
 
 
