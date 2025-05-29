@@ -61,7 +61,7 @@ bool eq = (v5 == v6); // true
 
 # Spartos analizė
 
-naudojamas bench.cpp failas su tam tikru skaičiumi elementų.
+naudojamas bench.cpp failas su tam tikru skaičiumi elementų(užkomentuota dalis).
 
 |Elementu skaicius | std::vector (s) | Vector (s)|
 -----------------|-----------------|------------|
