@@ -22,61 +22,65 @@ cd Debug
 
 # v3.0 Aprašymas
 
-# Instaliavimo instrukcijos
-Parsisiunčiame Setup.exe iš šios repozitorijos
-Parsisiuntus failui, spaudžiame ant jo
-Suteikiame administratoriaus privilegijas
-Visur spaudžiame mygtuką "next"
-Programa turėtų automatiškai susinstaliuoti "C:\Program Files (x86)\VU\Tauras-Petrauskas"
-Programą galima paleisti ant ikonėles du kartus paspaudus darbalaukyje arba meniu juostoje VU->Tauras Petrauskas
+## Instaliavimo instrukcijos
 
-v3.0: Nuosavos Vector klasės testavimas ir palyginimas su std::vector
-Funkcionalumo padengimas
-Sukurta šabloninė klasė Vector<T>, kuri atkuria daugiau nei 80% std::vector funkcionalumo:
+1. Parsisiųskite `Setup.exe` iš šios repozitorijos.
+2. Paleiskite atsisiųstą failą.
+3. Suteikite administratoriaus privilegijas.
+4. Visur spauskite mygtuką „Next“.
+5. Programa automatiškai bus įdiegta į `C:\Program Files (x86)\VU\Tauras-Petrauskas`.
+6. Programą paleisite dukart spustelėję darbalaukio ikoną arba per meniu juostą **VU → Tauras Petrauskas**.
 
-Konstruktoriai (default, copy, move, su dydžiu, iš initializer_list)
-Destruktorius, copy/move assignment
-Elementų prieiga: operator[], at, front, back, data
-Iteratoriai: begin, end, rbegin, rend, jų const versijos
-Talpa: size, capacity, empty, reserve, shrink_to_fit
-Modifikatoriai: clear, push_back, pop_back, resize, swap, insert, erase, assign, emplace_back, emplace
-Operatoriai: ==, !=, <, >, <=, >=
-Non-member swap, get_allocator
+
+---
+
+## Vector<T> funkcionalumo pavyzdžiai
+
 Toliau pateikiami kelių funkcijų palyginimo pavyzdžiai – rezultatai identiški kaip ir su std::vector:
 
+```cpp
 // push_back ir operator[]
 Vector<int> v;
 v.push_back(10);
 v.push_back(20);
 std::cout << v[1] << std::endl; // 20
+```
 
-push_back prideda elementą į vektoriaus pabaigą.
-operator[] leidžia pasiekti elementą pagal indeksą.
+* push_back prideda elementą į vektoriaus pabaigą.
+* operator[] leidžia pasiekti elementą pagal indeksą.
 
+```cpp
 // insert
 Vector<int> v2 = {1, 2, 4};
 v2.insert(v2.begin() + 2, 3); // v2: 1 2 3 4
+```
 
-insert įterpia naują elementą į nurodytą vietą.
+* insert įterpia naują elementą į nurodytą vietą.
 
+```cpp
 // erase
 Vector<int> v3 = {1, 2, 3, 4};
 v3.erase(v3.begin() + 1); // v3: 1 3 4
+```
 
-erase pašalina elementą pagal nurodytą poziciją.
+* erase pašalina elementą pagal nurodytą poziciją.
 
+```cpp
 // assign
 Vector<int> v4;
 v4.assign(5, 7); // v4: 7 7 7 7 7
+```
 
-assign užpildo vektorių nurodytu kiekiu vienodų reikšmių.
+* assign užpildo vektorių nurodytu kiekiu vienodų reikšmių.
 
+```cpp
 // operator==
 Vector<int> v5 = {1, 2, 3};
 Vector<int> v6 = {1, 2, 3};
 bool eq = (v5 == v6); // true
+```
 
-operator== patikrina, ar du vektoriai yra lygūs.
+* operator== patikrina, ar du vektoriai yra lygūs.
 
 # Spartos analizė
 
