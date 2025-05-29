@@ -7,6 +7,9 @@
 #include <algorithm>
 #include <iterator>
 #include <memory>
+#include <utility>
+#include <type_traits>
+#include <vector> // tik jei norėsi palyginimui
 
 template <typename T>
 class Vector {
@@ -20,6 +23,8 @@ public:
     using const_pointer = const T*;
     using iterator = T*;
     using const_iterator = const T*;
+    using reverse_iterator = std::reverse_iterator<iterator>;
+    using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
 private:
     pointer data_;
@@ -95,6 +100,10 @@ public:
     const_iterator begin() const noexcept { return data_; }
     iterator end() noexcept { return data_ + sz_; }
     const_iterator end() const noexcept { return data_ + sz_; }
+    reverse_iterator rbegin() noexcept { return reverse_iterator(end()); }
+    const_reverse_iterator rbegin() const noexcept { return const_reverse_iterator(end()); }
+    reverse_iterator rend() noexcept { return reverse_iterator(begin()); }
+    const_reverse_iterator rend() const noexcept { return const_reverse_iterator(begin()); }
 
     // Capacity
     bool empty() const noexcept { return sz_ == 0; }
@@ -165,6 +174,15 @@ public:
         sz_ = il.size();
     }
 
+    // Assign from iterator range
+    template <typename InputIt>
+    void assign(InputIt first, InputIt last) {
+        size_type n = std::distance(first, last);
+        if (n > cap_) reserve(n);
+        std::copy(first, last, data_);
+        sz_ = n;
+    }
+
     // Emplace back
     template <typename... Args>
     void emplace_back(Args&&... args) {
@@ -173,33 +191,23 @@ public:
         ++sz_;
     }
 
-    // Comparison operators
-    bool operator==(const Vector& other) const {
-        if (sz_ != other.sz_) return false;
-        for (size_type i = 0; i < sz_; ++i)
-            if (!(data_[i] == other.data_[i])) return false;
-        return true;
-    }
-    bool operator!=(const Vector& other) const { return !(*this == other); }
-    bool operator<(const Vector& other) const {
-        return std::lexicographical_compare(begin(), end(), other.begin(), other.end());
-    }
-    bool operator>(const Vector& other) const { return other < *this; }
-    bool operator<=(const Vector& other) const { return !(other < *this); }
-    bool operator>=(const Vector& other) const { return !(*this < other); }
-
-     // Insert range [first, last) at position
+    // Insert range [first, last) at position
     template <typename InputIt>
     iterator insert(const_iterator pos, InputIt first, InputIt last) {
         size_type idx = pos - data_;
         size_type count = std::distance(first, last);
         if (sz_ + count > cap_) reserve(std::max(cap_ * 2, sz_ + count));
-        for (size_type i = sz_ + count - 1; i >= idx + count; --i)
+        for (size_type i = sz_ + count; i-- > idx + count; )
             data_[i] = std::move(data_[i - count]);
         for (size_type i = 0; i < count; ++i)
             data_[idx + i] = *(first++);
         sz_ += count;
         return data_ + idx;
+    }
+
+    // Insert initializer_list at position
+    iterator insert(const_iterator pos, std::initializer_list<T> ilist) {
+        return insert(pos, ilist.begin(), ilist.end());
     }
 
     // Erase range [first, last)
@@ -224,6 +232,30 @@ public:
         ++sz_;
         return data_ + idx;
     }
+
+    // get_allocator
+    std::allocator<T> get_allocator() const { return std::allocator<T>(); }
+
+    // Comparison operators
+    bool operator==(const Vector& other) const {
+        if (sz_ != other.sz_) return false;
+        for (size_type i = 0; i < sz_; ++i)
+            if (!(data_[i] == other.data_[i])) return false;
+        return true;
+    }
+    bool operator!=(const Vector& other) const { return !(*this == other); }
+    bool operator<(const Vector& other) const {
+        return std::lexicographical_compare(begin(), end(), other.begin(), other.end());
+    }
+    bool operator>(const Vector& other) const { return other < *this; }
+    bool operator<=(const Vector& other) const { return !(other < *this); }
+    bool operator>=(const Vector& other) const { return !(*this < other); }
 };
+
+// Non-member swap
+template <typename T>
+void swap(Vector<T>& a, Vector<T>& b) noexcept {
+    a.swap(b);
+}
 
 #endif // VECTOR_H
