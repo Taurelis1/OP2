@@ -23,12 +23,12 @@ cd Debug
 # v3.0 Aprašymas
 
 # Instaliavimo instrukcijos
-**Parsisiunčiame Setup.exe iš šios repozitorijos**
-**Parsisiuntus failui, spaudžiame ant jo**
-**Suteikiame administratoriaus privilegijas**
-**Visur spaudžiame mygtuką "next"**
-**Programa turėtų automatiškai susinstaliuoti "C:\Program Files (x86)\VU\Tauras-Petrauskas"**
-**Programą galima paleisti ant ikonėles du kartus paspaudus darbalaukyje arba meniu juostoje VU->Tauras Petrauskas**
+Parsisiunčiame Setup.exe iš šios repozitorijos
+Parsisiuntus failui, spaudžiame ant jo
+Suteikiame administratoriaus privilegijas
+Visur spaudžiame mygtuką "next"
+Programa turėtų automatiškai susinstaliuoti "C:\Program Files (x86)\VU\Tauras-Petrauskas"
+Programą galima paleisti ant ikonėles du kartus paspaudus darbalaukyje arba meniu juostoje VU->Tauras Petrauskas
 
 v3.0: Nuosavos Vector klasės testavimas ir palyginimas su std::vector
 Funkcionalumo padengimas
