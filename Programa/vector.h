@@ -131,7 +131,65 @@ public:
         std::swap(cap_, other.cap_);
     }
 
-    // TODO: insert, erase, assign, emplace, emplace_back, operator==, operator!=, operator<, operator>, operator<=, operator>= ir kt.
+    // Insert element at position
+    iterator insert(const_iterator pos, const T& value) {
+        size_type idx = pos - data_;
+        if (sz_ == cap_) reserve(cap_ == 0 ? 1 : cap_ * 2);
+        for (size_type i = sz_; i > idx; --i)
+            data_[i] = std::move(data_[i - 1]);
+        data_[idx] = value;
+        ++sz_;
+        return data_ + idx;
+    }
+
+    // Erase element at position
+    iterator erase(const_iterator pos) {
+        size_type idx = pos - data_;
+        for (size_type i = idx; i + 1 < sz_; ++i)
+            data_[i] = std::move(data_[i + 1]);
+        --sz_;
+        return data_ + idx;
+    }
+
+    // Assign n copies of value
+    void assign(size_type n, const T& value) {
+        if (n > cap_) reserve(n);
+        std::fill(data_, data_ + n, value);
+        sz_ = n;
+    }
+
+    // Assign from initializer_list
+    void assign(std::initializer_list<T> il) {
+        if (il.size() > cap_) reserve(il.size());
+        std::copy(il.begin(), il.end(), data_);
+        sz_ = il.size();
+    }
+
+    // Emplace back
+    template <typename... Args>
+    void emplace_back(Args&&... args) {
+        if (sz_ == cap_) reserve(cap_ == 0 ? 1 : cap_ * 2);
+        new (data_ + sz_) T(std::forward<Args>(args)...);
+        ++sz_;
+    }
+
+    // Comparison operators
+    bool operator==(const Vector& other) const {
+        if (sz_ != other.sz_) return false;
+        for (size_type i = 0; i < sz_; ++i)
+            if (!(data_[i] == other.data_[i])) return false;
+        return true;
+    }
+    bool operator!=(const Vector& other) const { return !(*this == other); }
+    bool operator<(const Vector& other) const {
+        return std::lexicographical_compare(begin(), end(), other.begin(), other.end());
+    }
+    bool operator>(const Vector& other) const { return other < *this; }
+    bool operator<=(const Vector& other) const { return !(other < *this); }
+    bool operator>=(const Vector& other) const { return !(*this < other); }
+
+    // More methods (emplace, insert range, erase range, etc.) can be added as needed
+
 };
 
 #endif // VECTOR_H
