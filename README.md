@@ -111,6 +111,19 @@ atliktas unit_test aplanke
 
 ![Testo rezultatas6](nuotraukos/testas6.png)
 
+## Sukurta dokumentacija naudojant [Doxygen](https://www.doxygen.nl/index.html)
+
+### Kaip naudotis šia dokumentacija?
+
+Dokumentaciją galima peržiūrėti dviejais būdais:
+
++ Kaip ```.html``` failą
++ Kaip ```.pdf``` failą
+
++ Norint dokumentaciją peržiūrėti kaip ```.html``` failą, jums reikės jį atsidaryti bet kurioje naršyklėje.\
+Šis failas yra šioje lokacijoje: ```/Dokumentacija/hmtl/index.html```
++ Norint dokumentaciją peržiūrėti kaip ```.pdf``` failą, jums reikės jį atsidaryti bet kurioje ```.pdf``` failus skaitančioje programoje.\
+Šis failas yra šioje lokacijoje: ```/Dokumentacija/latex/OP3.pdf```
 
 # v2.0 Aprašymas
 
