@@ -19,6 +19,62 @@ cd Debug
    - Įveskite failo pavadinimą, jei reikia.
 5. Rezultatai bus išsaugoti į `vargsai.txt` ir `kietakai.txt` failus.
 
+
+# v3.0 Aprašymas
+
+v3.0: Nuosavos Vector klasės testavimas ir palyginimas su std::vector
+Funkcionalumo padengimas
+Sukurta šabloninė klasė Vector<T>, kuri atkuria daugiau nei 80% std::vector funkcionalumo:
+
+Konstruktoriai (default, copy, move, su dydžiu, iš initializer_list)
+Destruktorius, copy/move assignment
+Elementų prieiga: operator[], at, front, back, data
+Iteratoriai: begin, end, rbegin, rend, jų const versijos
+Talpa: size, capacity, empty, reserve, shrink_to_fit
+Modifikatoriai: clear, push_back, pop_back, resize, swap, insert, erase, assign, emplace_back, emplace
+Operatoriai: ==, !=, <, >, <=, >=
+Non-member swap, get_allocator
+Testavimo pavyzdžiai
+Toliau pateikiami kelių funkcijų palyginimo pavyzdžiai – rezultatai identiški kaip ir su std::vector:
+
+// push_back ir operator[]
+Vector<int> v;
+v.push_back(10);
+v.push_back(20);
+std::cout << v[1] << std::endl; // 20
+
+// insert
+Vector<int> v2 = {1, 2, 4};
+v2.insert(v2.begin() + 2, 3); // v2: 1 2 3 4
+
+// erase
+Vector<int> v3 = {1, 2, 3, 4};
+v3.erase(v3.begin() + 1); // v3: 1 3 4
+
+// assign
+Vector<int> v4;
+v4.assign(5, 7); // v4: 7 7 7 7 7
+
+// operator==
+Vector<int> v5 = {1, 2, 3};
+Vector<int> v6 = {1, 2, 3};
+bool eq = (v5 == v6); // true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # v2.0 Aprašymas
 
 ## Sukurti unit testai naudojant [Catch2](https://github.com/catchorg/Catch2)
